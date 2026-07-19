@@ -1,0 +1,55 @@
+<!--
+  android/app/src/main/res/xml/network_security_config.xml
+  ══════════════════════════════════════════════════════════════════════════
+  Enforces HTTPS for all network requests from SvayamVikās.
+  Required for Android 9+ (API 28+). Ensures API keys sent over TLS only.
+
+  PLACE THIS FILE AT:
+    android/app/src/main/res/xml/network_security_config.xml
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <!-- ── Production: HTTPS only, cert pinning for your CF Worker ──────── -->
+    <domain-config cleartextTrafficPermitted="false">
+
+        <!-- Your Cloudflare Worker proxy (replace with your actual subdomain) -->
+        <domain includeSubdomains="false">YOUR-WORKER.workers.dev</domain>
+
+        <!-- Google Fonts (for Cinzel, Crimson Pro) -->
+        <domain includeSubdomains="true">fonts.googleapis.com</domain>
+        <domain includeSubdomains="true">fonts.gstatic.com</domain>
+
+        <!-- Three.js CDN -->
+        <domain includeSubdomains="true">cdnjs.cloudflare.com</domain>
+
+        <!-- Certificate pinning for your Worker (optional but recommended) -->
+        <!--
+        <pin-set expiration="2026-12-31">
+            <pin digest="SHA-256">YOUR_CF_WORKER_CERT_PIN_BASE64=</pin>
+            <pin digest="SHA-256">BACKUP_PIN_BASE64=</pin>
+        </pin-set>
+        -->
+
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- ── Development only: allow localhost (remove before release build) ─ -->
+    <!--
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain>
+    </domain-config>
+    -->
+
+    <!-- ── Base config: block all cleartext by default ──────────────────── -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+</network-security-config>
