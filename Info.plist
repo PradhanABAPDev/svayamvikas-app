@@ -1,0 +1,161 @@
+<!--
+  SvayamVikās — iOS Info.plist additions
+  ══════════════════════════════════════════════════════════════════════════
+  After running `npx cap add ios`, MERGE these keys into:
+    ios/App/App/Info.plist
+
+  Apple rejects apps missing required privacy usage descriptions.
+  Every key listed here is validated by App Store Review.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <!-- ── App Identity ─────────────────────────────────────────────────── -->
+    <key>CFBundleName</key>
+    <string>SvayamVikās</string>
+
+    <key>CFBundleDisplayName</key>
+    <string>SvayamVikās</string>
+
+    <key>CFBundleIdentifier</key>
+    <string>com.svayam.vikas</string>
+
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+
+    <!-- Increment this integer with every App Store submission -->
+    <key>CFBundleVersion</key>
+    <string>1</string>
+
+    <!-- ── Supported Platforms ───────────────────────────────────────────── -->
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+
+    <!-- Support iPhone + iPad (Universal) -->
+    <key>UIDeviceFamily</key>
+    <array>
+        <integer>1</integer>  <!-- iPhone -->
+        <integer>2</integer>  <!-- iPad -->
+    </array>
+
+    <!-- ── Screen & Orientation ─────────────────────────────────────────── -->
+    <!-- Game supports all orientations -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <!-- ── Full-Screen Game Mode ─────────────────────────────────────────── -->
+    <!-- Hides status bar entirely for immersive game experience -->
+    <key>UIStatusBarHidden</key>
+    <true/>
+
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleLightContent</string>
+
+    <!-- Renders under the notch / Dynamic Island -->
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+
+    <!-- ── Home Indicator ────────────────────────────────────────────────── -->
+    <!-- Hides the home indicator swipe bar during gameplay -->
+    <key>UIHomeIndicatorAutoHidden</key>
+    <true/>
+
+    <!-- ── Launch Screen ─────────────────────────────────────────────────── -->
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+
+    <key>UILaunchScreen</key>
+    <dict>
+        <key>UIColorName</key>
+        <string>LaunchScreenBackground</string>
+    </dict>
+
+    <!-- ── Privacy Usage Descriptions (App Store Review REQUIRES these) ─── -->
+    <!-- Describe WHY your app needs each permission.
+         Vague descriptions ("for better experience") cause rejection. -->
+
+    <!-- Network: used for AI companion + multiplayer -->
+    <!-- No key needed — network access doesn't require user permission -->
+
+    <!-- Camera: only if you add AR features later -->
+    <!-- <key>NSCameraUsageDescription</key>
+    <string>SvayamVikās uses the camera for augmented reality boss battles</string> -->
+
+    <!-- Microphone: only if you add voice commands -->
+    <!-- <key>NSMicrophoneUsageDescription</key>
+    <string>SvayamVikās uses the microphone for voice-commanded Sanskrit mantras</string> -->
+
+    <!-- Photo Library: for saving game screenshots -->
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>SvayamVikās saves gameplay screenshots to your photo library when you request it.</string>
+
+    <!-- ── App Transport Security (ATS) ─────────────────────────────────── -->
+    <!-- HTTPS-only by default. Exceptions listed explicitly below. -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+
+        <key>NSExceptionDomains</key>
+        <dict>
+            <!-- Your Cloudflare Worker -->
+            <key>YOUR-WORKER.workers.dev</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <false/>
+                <key>NSExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+                <key>NSIncludesSubdomains</key>
+                <false/>
+            </dict>
+
+            <!-- Google Fonts -->
+            <key>fonts.googleapis.com</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+            </dict>
+
+            <!-- Three.js CDN -->
+            <key>cdnjs.cloudflare.com</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <false/>
+            </dict>
+        </dict>
+    </dict>
+
+    <!-- ── Required Background Modes ────────────────────────────────────── -->
+    <!-- Allows game audio to continue when app backgrounds -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>audio</string>
+    </array>
+
+    <!-- ── Metal / OpenGL ES (for WebGL) ─────────────────────────────────── -->
+    <key>GPUEjectPolicy</key>
+    <string>wait</string>
+
+</dict>
+</plist>
