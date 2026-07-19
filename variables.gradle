@@ -1,0 +1,39 @@
+// ─── SvayamVikās Android Build Variables ──────────────────────────────────────
+// Edit these values — they propagate to all Android modules automatically.
+// Keep minSdkVersion at 24 (Android 7.0) — covers 98%+ of active devices.
+// targetSdkVersion MUST match or exceed Google Play's current requirement (34 in 2025).
+
+ext {
+
+  // ── SDK Versions ────────────────────────────────────────────────────────────
+  minSdkVersion        = 24    // Android 7.0 Nougat — minimum supported
+  compileSdkVersion    = 34    // Android 14 — what we compile against
+  targetSdkVersion     = 34    // REQUIRED by Play Store for new submissions
+  buildToolsVersion    = "34.0.0"
+
+  // ── App Versioning ──────────────────────────────────────────────────────────
+  // versionCode MUST increase with every Play Store upload (integer)
+  // versionName is the human-readable string shown in the store
+  versionCode          = 1
+  versionName          = "1.0.0"
+
+  // ── AndroidX / Kotlin ───────────────────────────────────────────────────────
+  androidxActivityVersion         = '1.7.0'
+  androidxAppCompatVersion        = '1.6.1'
+  androidxCoordinatorLayoutVersion = '1.2.0'
+  androidxCoreKTXVersion          = '1.10.0'
+  androidxFragmentVersion         = '1.5.7'
+  coreSplashScreenVersion         = '1.0.0'
+  cordovaAndroidVersion           = '10.1.1'
+  firebaseMessagingVersion        = '23.1.2'
+  junitVersion                    = '4.13.2'
+  androidxJunitVersion            = '1.1.5'
+  androidxEspressoCoreVersion     = '3.5.1'
+  kotlin_version                  = '1.9.10'
+
+  // ── WebView Settings (critical for WebGL performance) ───────────────────────
+  // These are used in MainActivity.kt — see android-patches/MainActivity.kt
+  webViewHardwareAcceleration     = true
+  webViewAllowFileAccess          = false
+  webViewJavaScriptEnabled        = true
+}
